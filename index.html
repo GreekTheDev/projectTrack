@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarządzanie Projektami</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Zarządzanie Projektami</h1>
+        <div id="tasksCounter" class="tasks-counter">
+            <!-- Tutaj będzie wyświetlany licznik zadań -->
+        </div>
+        <div class="header-actions">
+            <button id="addProjectBtn" class="btn btn-primary">Dodaj projekt</button>
+            <button id="completedTasksBtn" class="btn btn-success">Ukończone</button>
+            <button id="settingsBtn" class="btn btn-secondary">Ustawienia</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="projectsContainer" class="projects-container">
+            <!-- Tutaj będą wyświetlane projekty -->
+            <div class="empty-state">
+                <p>Brak projektów. Kliknij "Dodaj projekt", aby rozpocząć.</p>
+            </div>
+        </div>
+        
+        <div id="completedTasksContainer" class="completed-tasks-container" style="display: none;">
+            <div class="completed-tasks-header">
+                <h2>Ukończone zadania</h2>
+                <button id="backToProjectsBtn" class="btn btn-secondary">Powrót do projektów</button>
+            </div>
+            <div class="completed-tasks-list">
+                <!-- Tutaj będą wyświetlane ukończone zadania -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal do dodawania/edycji projektu -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="projectModalTitle">Dodaj nowy projekt</h2>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="projectName">Nazwa projektu</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal do dodawania/edycji sekcji -->
+    <div id="sectionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="sectionModalTitle">Dodaj nową sekcję</h2>
+            <form id="sectionForm">
+                <div class="form-group">
+                    <label for="sectionName">Nazwa sekcji</label>
+                    <input type="text" id="sectionName" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal do dodawania/edycji zadania -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="taskModalTitle">Dodaj nowe zadanie</h2>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskName">Nazwa zadania</label>
+                    <input type="text" id="taskName" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskStatus">Status</label>
+                    <select id="taskStatus" required>
+                        <!-- Opcje statusów będą dodawane dynamicznie -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskAssignee">Przypisana osoba</label>
+                    <select id="taskAssignee">
+                        <option value="">Brak</option>
+                        <!-- Opcje użytkowników będą dodawane dynamicznie -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskStartDate">Data rozpoczęcia</label>
+                    <input type="date" id="taskStartDate">
+                </div>
+                <div class="form-group">
+                    <label for="taskEndDate">Data zakończenia</label>
+                    <input type="date" id="taskEndDate">
+                </div>
+                <div class="form-group">
+                    <label for="taskSubtasks">Podzadania</label>
+                    <div id="subtasksContainer">
+                        <!-- Tutaj będą dodawane podzadania -->
+                    </div>
+                    <button type="button" id="addSubtaskBtn" class="btn btn-small">Dodaj podzadanie</button>
+                </div>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal do timesheet -->
+    <div id="timesheetModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Time Sheet</h2>
+            <div id="timesheetContainer">
+                <div class="timesheet-form">
+                    <div class="form-group">
+                        <label for="timesheetDate">Data</label>
+                        <input type="date" id="timesheetDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="timesheetHours">Liczba godzin</label>
+                        <input type="number" id="timesheetHours" min="0.5" max="24" step="0.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="timesheetDescription">Opis</label>
+                        <textarea id="timesheetDescription"></textarea>
+                    </div>
+                    <button type="button" id="addTimesheetEntryBtn" class="btn btn-primary">Dodaj wpis</button>
+                </div>
+                <div id="timesheetEntries">
+                    <!-- Tutaj będą wyświetlane wpisy timesheet -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal ustawień -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Ustawienia</h2>
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="statuses">Statusy zadań</button>
+                <button class="tab-btn" data-tab="users">Użytkownicy</button>
+            </div>
+            <div class="tab-content">
+                <div id="statusesTab" class="tab-pane active">
+                    <h3>Statusy zadań</h3>
+                    <div id="statusesContainer">
+                        <!-- Tutaj będą wyświetlane statusy -->
+                    </div>
+                    <div class="form-group">
+                        <label for="newStatus">Nowy status</label>
+                        <input type="text" id="newStatus">
+                        <input type="color" id="statusColor" value="#3498db">
+                        <button id="addStatusBtn" class="btn btn-small">Dodaj</button>
+                    </div>
+                </div>
+                <div id="usersTab" class="tab-pane">
+                    <h3>Użytkownicy</h3>
+                    <div id="usersContainer">
+                        <!-- Tutaj będą wyświetlani użytkownicy -->
+                    </div>
+                    <div class="form-group">
+                        <label for="newUser">Nowy użytkownik</label>
+                        <input type="text" id="newUser">
+                        <button id="addUserBtn" class="btn btn-small">Dodaj</button>
+                    </div>
+                </div>
+            </div>
+            <button id="saveSettingsBtn" class="btn btn-primary">Zapisz ustawienia</button>
+        </div>
+    </div>
+
+    <!-- Potwierdzenie usunięcia -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Potwierdzenie</h2>
+            <p id="confirmMessage">Czy na pewno chcesz usunąć ten element?</p>
+            <div class="modal-actions">
+                <button id="confirmYesBtn" class="btn btn-danger">Tak</button>
+                <button id="confirmNoBtn" class="btn btn-secondary">Nie</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

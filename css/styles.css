@@ -1,0 +1,653 @@
+/* Reset i podstawowe style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--color-gray-800);
+    background-color: var(--color-gray-100);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Nagłówek */
+header {
+    background-color: var(--color-white);
+    padding: var(--spacing-4) var(--spacing-6);
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-sticky);
+}
+
+/* Licznik zadań */
+.tasks-counter {
+    display: flex;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.counter-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.counter-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 var(--spacing-2);
+    border-radius: var(--border-radius-full);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--color-white);
+}
+
+h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
+/* Główna zawartość */
+main {
+    flex: 1;
+    padding: var(--spacing-6);
+    overflow-x: auto;
+}
+
+/* Ukończone zadania */
+.completed-tasks-container {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.completed-tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-4) var(--spacing-6);
+    background-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.completed-tasks-header h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin: 0;
+}
+
+.completed-tasks-list {
+    padding: var(--spacing-4);
+}
+
+.completed-task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.completed-task-info {
+    flex: 1;
+}
+
+.completed-task-name {
+    font-weight: 500;
+    margin-bottom: var(--spacing-1);
+}
+
+.completed-task-details {
+    display: flex;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+}
+
+.completed-task-project {
+    font-style: italic;
+}
+
+.completed-task-actions {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+/* Przyciski */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-base);
+    border: none;
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-800);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-gray-300);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-small {
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-sm);
+}
+
+/* Projekty */
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+}
+
+.project {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-4) var(--spacing-6);
+    background-color: var(--color-gray-200);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.project-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.project-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.project-progress-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.project-progress {
+    width: 150px;
+    height: 8px;
+    background-color: var(--color-gray-300);
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+}
+
+.project-progress-bar {
+    height: 100%;
+    background-color: var(--color-success);
+}
+
+.project-progress-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+}
+
+.project-actions {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.project-content {
+    padding: var(--spacing-4);
+}
+
+/* Sekcje */
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+}
+
+.section {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: var(--color-gray-200);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.section-title {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    color: var(--color-secondary);
+}
+
+.section-actions {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+/* Tabela zadań */
+.tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tasks-table th,
+.tasks-table td {
+    padding: var(--spacing-3);
+    text-align: left;
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.tasks-table th {
+    background-color: var(--color-gray-100);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tasks-table tr:hover {
+    background-color: var(--color-gray-100);
+}
+
+.task-actions {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.task-status {
+    display: inline-block;
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.status-dropdown-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    z-index: 1500; /* Dodany z-index */
+}
+
+.btn-icon {
+    padding: var(--spacing-1);
+    min-width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-icon {
+    font-size: 10px;
+}
+
+.status-dropdown {
+    display: none;
+    position: fixed; /* Zmienione z absolute na fixed */
+    z-index: 9999; /* Jeszcze wyższy z-index */
+    min-width: 150px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-gray-300);
+    margin-top: var(--spacing-1);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.status-dropdown.show {
+    display: block;
+}
+
+.status-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.status-dropdown-item:hover {
+    background-color: var(--color-gray-100);
+}
+
+.status-dropdown-item .status-color {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--border-radius-sm);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+}
+
+.task-progress {
+    width: 100%;
+    height: 8px;
+    background-color: var(--color-gray-200);
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+}
+
+.task-progress-bar {
+    height: 100%;
+    background-color: var(--color-success);
+}
+
+.timesheet-toggle {
+    cursor: pointer;
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* Modalne okna */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-index-modal);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: 10% auto;
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-gray-500);
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--color-gray-700);
+}
+
+/* Formularze */
+.form-group {
+    margin-bottom: var(--spacing-4);
+}
+
+label {
+    display: block;
+    margin-bottom: var(--spacing-2);
+    font-weight: 500;
+    color: var(--color-gray-700);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: var(--spacing-2) var(--spacing-3);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius);
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Ustawienia */
+.settings-tabs {
+    display: flex;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-4);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.tab-btn {
+    padding: var(--spacing-2) var(--spacing-4);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    color: var(--color-gray-600);
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Status i użytkownicy */
+.status-item,
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-2) var(--spacing-3);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.status-color {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--border-radius);
+    margin-right: var(--spacing-2);
+}
+
+.status-name,
+.user-name {
+    flex: 1;
+}
+
+/* Podzadania */
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+}
+
+/* Wyświetlanie podzadań w tabeli */
+.task-name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtasks-row {
+    background-color: var(--color-gray-100);
+}
+
+.subtasks-cell {
+    padding: var(--spacing-2) var(--spacing-6);
+}
+
+.subtasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.subtask-list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) 0;
+}
+
+.subtask-checkbox {
+    margin: 0;
+}
+
+.subtask-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-800);
+    transition: var(--transition-base);
+}
+
+.subtask-label.completed {
+    text-decoration: line-through;
+    color: var(--color-gray-500);
+}
+
+.quick-add-subtask-form {
+    margin-top: var(--spacing-2);
+    width: 100%;
+}
+
+.quick-subtask-input {
+    width: 100%;
+    padding: var(--spacing-1) var(--spacing-2);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+}
+
+/* Timesheet */
+.timesheet-entry {
+    padding: var(--spacing-3);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.timesheet-date {
+    font-weight: 500;
+}
+
+.timesheet-hours {
+    color: var(--color-gray-600);
+}
+
+/* Stan pusty */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-8);
+    color: var(--color-gray-600);
+}
+
+/* Modal potwierdzenia */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-6);
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: var(--spacing-3);
+        align-items: flex-start;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .tasks-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
